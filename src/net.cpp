@@ -57,7 +57,7 @@ static bool vfReachable[NET_MAX] = {};
 static bool vfLimited[NET_MAX] = {};
 static CNode* pnodeLocalHost = NULL;
 uint64 nLocalHostNonce = 0;
-array<int, THREAD_MAX> vnThreadsRunning;
+boost::array<int, THREAD_MAX> vnThreadsRunning; // declared  boost array -AF
 static std::vector<SOCKET> vhListenSocket;
 CAddrMan addrman;
 
@@ -1034,7 +1034,8 @@ void ThreadMapPort2(void* parg)
 #else
     /* miniupnpc 1.6 */
     int error = 0;
-    devlist = upnpDiscover(2000, multicastif, minissdpdpath, 0, 0, &error);
+    devlist = upnpDiscover(2000, multicastif, minissdpdpath, 0, 0, 2,  &error);
+//      devlist = upnpDiscover(2000, multicastif, minissdpdpath, 0, 0,  &error);
 #endif
 
     struct UPNPUrls urls;
